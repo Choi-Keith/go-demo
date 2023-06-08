@@ -1,0 +1,121 @@
+basePath: /api/v1
+definitions:
+  user.CreateParamsDto:
+    properties:
+      avatar:
+        type: string
+      description:
+        type: string
+      email:
+        type: string
+      level:
+        type: integer
+      password:
+        type: string
+      phone:
+        type: string
+      rePassword:
+        type: string
+      username:
+        type: string
+      weChatId:
+        type: string
+      website:
+        type: string
+    required:
+    - email
+    - password
+    - rePassword
+    - username
+    type: object
+  user.CreateRespDto:
+    properties:
+      code:
+        type: integer
+      data:
+        type: string
+      msg:
+        type: string
+    type: object
+  user.Item:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/user.CreateParamsDto'
+        type: array
+      total:
+        type: integer
+    type: object
+  user.ListRespDto:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/user.Item'
+      msg:
+        type: string
+    type: object
+host: localhost:9100
+info:
+  contact:
+    email: aksoncai@gmail.com
+    name: API Support
+    url: moqing.club
+  description: This is a sample server Petstore server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: qinglv
+  version: "1.0"
+paths:
+  /user:
+    get:
+      consumes:
+      - application/json
+      description: 列表
+      parameters:
+      - in: query
+        name: id
+        type: string
+      - in: query
+        name: pageNum
+        type: integer
+      - in: query
+        name: pageSize
+        type: integer
+      - in: query
+        name: username
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.ListRespDto'
+      summary: 列表
+      tags:
+      - 用户
+    post:
+      consumes:
+      - application/json
+      description: 创建用户
+      parameters:
+      - description: Create
+        in: body
+        name: create
+        required: true
+        schema:
+          $ref: '#/definitions/user.CreateParamsDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.CreateRespDto'
+      summary: 创建用户
+      tags:
+      - 用户
+swagger: "2.0"
