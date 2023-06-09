@@ -1,9 +1,10 @@
 package article
 
 import (
+	"context"
 	"demo01/pkg/common/errors"
 	"demo01/pkg/common/response"
-	"fmt"
+	"demo01/pkg/logger/logrusx"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -17,12 +18,12 @@ var Service = newService()
 func (a *Controller) Create(ctx *gin.Context) {
 	var params CreateParamsDto
 	if err := ctx.ShouldBindJSON(&params); err != nil {
-		fmt.Printf("创建文章参数错误: %v\n", err)
+		logrusx.Errorf(context.Background(), "创建文章参数错误: %v\n", err)
 		response.FailWithStatus(ctx, http.StatusBadRequest, errors.ErrCreateArticle)
 		return
 	}
 	if err := Service.Create(ctx, &params); err != nil {
-		fmt.Printf("创建文章失败: %v\n", err)
+		logrusx.Errorf(context.Background(), "创建文章失败: %v\n", err)
 		response.FailWithStatus(ctx, http.StatusBadRequest, errors.ErrCreateArticle)
 		return
 	}
@@ -33,7 +34,7 @@ func (a *Controller) Get(ctx *gin.Context) {
 	id := ctx.Param("id")
 	article, err := Service.Get(id)
 	if err != nil {
-		fmt.Printf("获取文章失败: %v\n", err)
+		logrusx.Errorf(ctx, "获取文章失败: %v\n", err)
 		response.Fail(ctx, errors.ErrGetArticle)
 		return
 	}

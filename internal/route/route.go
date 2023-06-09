@@ -14,7 +14,7 @@ import (
 
 func SetupRouter(engine *gin.Engine) {
 
-	engine.Use(middleware.CORSMiddleware(), gin.Logger(), gin.Recovery())
+	engine.Use(middleware.CORSMiddleware(), gin.Recovery())
 	v1 := engine.Group("/api/v1")
 
 	engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))

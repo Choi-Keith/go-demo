@@ -5,6 +5,7 @@ import (
 	"demo01/internal/module"
 	"demo01/internal/route"
 	"demo01/pkg/gormx"
+	"demo01/pkg/logger/logrusx"
 
 	"github.com/gin-gonic/gin"
 )
@@ -24,6 +25,8 @@ import (
 //	@host		localhost:9100
 //	@BasePath	/api/v1
 func main() {
+
+	logrusx.InitLog("development")
 	engine := gin.New()
 	gormx.InitDB(module.Models)
 
