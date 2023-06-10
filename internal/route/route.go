@@ -41,6 +41,7 @@ func SetupRouter(engine *gin.Engine) {
 	{
 		userGroup.GET("", userController.List)
 		userGroup.GET("/:id", userController.Get)
+		userGroup.GET("/email", userController.TestEmail)
 	}
 
 	categoryController := &category.Controller{}

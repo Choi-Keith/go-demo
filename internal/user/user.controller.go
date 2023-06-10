@@ -122,3 +122,8 @@ func (a *Controller) Create(ctx *gin.Context) {
 	}
 	response.Ok(ctx)
 }
+
+func (a *Controller) TestEmail(ctx *gin.Context) {
+	Service.Send(ctx)
+	response.Ok(ctx)
+}
