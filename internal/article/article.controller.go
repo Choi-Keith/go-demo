@@ -40,3 +40,8 @@ func (a *Controller) Get(ctx *gin.Context) {
 	}
 	response.RespWithData(ctx, article)
 }
+
+func (a *Controller) Insert(ctx *gin.Context) {
+	Service.Insert()
+	response.Ok(ctx)
+}

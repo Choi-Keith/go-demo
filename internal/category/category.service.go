@@ -17,7 +17,7 @@ func newService() *service {
 }
 
 func (a *service) getCategoryByName(name string) (*Category, error) {
-	return a.getCategoryByName(name)
+	return Repo.GetCategoryByName(name)
 }
 
 func (a *service) Create(ctx *gin.Context, params CreateParamsDto) error {

@@ -56,6 +56,8 @@ func SetupRouter(engine *gin.Engine) {
 	{
 		articleGroup.GET("/:id", articleController.Get)
 		articleGroup.POST("", articleController.Create)
+		userGroup.POST("/elastic", articleController.Insert)
+
 	}
 
 }
